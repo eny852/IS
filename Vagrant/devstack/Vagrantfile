@@ -1,0 +1,26 @@
+VAGRANTFILE_API_VERSION = "2"
+
+password = ARGV[0]
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+################
+### DEVSTACK ###
+################
+  config.vm.define "devstack" do |config|
+    config.vm.box = "ubuntu/bionic64"
+
+    config.vm.provider "virtualbox" do |v|
+      v.gui = false
+      v.memory = 8192
+      v.cpus = 2
+    end
+
+    config.vm.network "private_network", ip: "10.0.0.25"
+
+    config.vm.hostname = "devstack.vagrant"
+
+    config.vm.provision "shell", path: "scripts/base.sh", privileged: true
+    config.vm.provision "shell", path: "scripts/install-devstack.sh", privileged: false, args: [password]
+  end
+
+end

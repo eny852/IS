@@ -28,8 +28,6 @@ EOF
 
 ./stack.sh
 
-sudo echo "$HOST_IP controller" >> /etc/hosts
-
 cat << EOF > /home/vagrant/admin-openrc
 export OS_PROJECT_DOMAIN_NAME=Default
 export OS_USER_DOMAIN_NAME=Default

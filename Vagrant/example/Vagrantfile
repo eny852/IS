@@ -1,0 +1,22 @@
+VAGRANTFILE_API_VERSION = "2"
+
+HOST_NAME = "myDebian"
+PRIVATE_IP_ADDRESS = "10.0.0.15"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.define HOST_NAME do |config|
+    config.vm.box = "debian/jessie64"
+
+    config.vm.provider "virtualbox" do |v|
+      v.gui = false
+      v.memory = 256
+      v.cpus = 1
+    end
+
+    config.vm.hostname = HOST_NAME
+    config.vm.network "private_network", ip: PRIVATE_IP_ADDRESS
+
+    config.vm.provision "shell", path: "scripts/base.sh", privileged: true
+    config.vm.provision "shell", path: "scripts/install-nginx.sh", privileged: true
+  end
+end

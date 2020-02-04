@@ -7,7 +7,7 @@ cd /tmp
 git clone https://opendev.org/openstack/devstack
 cd devstack
 
-git checkout stable/stein
+git checkout stable/train
 
 cat << EOF > local.conf
 [[local|localrc]]
@@ -22,8 +22,8 @@ LB_PHYSICAL_INTERFACE=enp0s3
 PUBLIC_PHYSICAL_NETWORK=default
 LB_INTERFACE_MAPPINGS=default:enp0s3
 
-enable_plugin heat https://opendev.org/openstack/heat stable/stein
-enable_plugin heat-dashboard https://opendev.org/openstack/heat-dashboard stable/stein
+enable_plugin heat https://opendev.org/openstack/heat stable/train
+enable_plugin heat-dashboard https://opendev.org/openstack/heat-dashboard stable/train
 EOF
 
 ./stack.sh
@@ -34,7 +34,7 @@ export OS_USER_DOMAIN_NAME=Default
 export OS_PROJECT_NAME=admin
 export OS_USERNAME=admin
 export OS_PASSWORD=kis2020
-export OS_AUTH_URL=http://controller/identity
+export OS_AUTH_URL=http://$HOST_IP/identity
 export OS_IDENTITY_API_VERSION=3
 export OS_IMAGE_API_VERSION=2
 EOF
